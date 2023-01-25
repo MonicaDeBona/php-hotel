@@ -38,17 +38,19 @@ $hotels = [
 ];
 
 $userParkingChoice = $_POST['chooseParking'];
+var_dump($_POST['chooseParking']);
 $newHotels = [];
-// if (isset($userParkingChoice) && $userParkingChoice == 'Yes' && $userParkingChoice != '') {
-//     foreach ($hotels as $key => $hotel) {
-//         if ($hotel['parking'] == true) {
-//             array_push($newHotels, $hotel);
-//         }
-//     }
-//     $hotels = $newHotels;
-// }
-$userVoteChoice = $_POST['chooseVote'];
-if (isset($userVoteChoice) && $userVoteChoice != '') {
+if (isset($userParkingChoice)) {
+    foreach ($hotels as $key => $hotel) {
+        if ($hotel['parking'] == true) {
+            array_push($newHotels, $hotel);
+        }
+    }
+    $hotels = $newHotels;
+}
+echo $_POST['chooseVote'];
+if (isset($_POST['chooseVote']) && $_POST['chooseVote'] != '') {
+    $userVoteChoice = $_POST['chooseVote'];
     foreach ($hotels as $key => $hotel) {
         if ($userVoteChoice == $hotel['vote']) {
             array_push($newHotels, $hotel);
@@ -56,11 +58,6 @@ if (isset($userVoteChoice) && $userVoteChoice != '') {
     }
     $hotels = $newHotels;
 }
-
-
-
-
-//Se esiste ed  è uguale a 1 { newArray, forEach oldArray push se parking = true} oldArray = newArray;
 
 ?>
 
@@ -93,7 +90,7 @@ if (isset($userVoteChoice) && $userVoteChoice != '') {
                             <input type="checkbox" name="chooseParking" value="Yes">
                         </div>
                         <div class="mb-3">
-                            <label for="hotelsVote" class="form-label">Choose hotel ranking</label>
+                            <label for="hotelsVote" class="form-label">Choose hotel rating</label>
                             <input type="number" class="form-control" name="chooseVote" max="5">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
