@@ -37,10 +37,10 @@ $hotels = [
     ],
 ];
 
-$userParkingChoice = $_POST['chooseParking'];
-var_dump($_POST['chooseParking']);
+
 $newHotels = [];
-if (isset($userParkingChoice)) {
+if (isset($_POST['chooseParking'])) {
+    $userParkingChoice = $_POST['chooseParking'];
     foreach ($hotels as $key => $hotel) {
         if ($hotel['parking'] == true) {
             array_push($newHotels, $hotel);
@@ -48,7 +48,7 @@ if (isset($userParkingChoice)) {
     }
     $hotels = $newHotels;
 }
-echo $_POST['chooseVote'];
+
 if (isset($_POST['chooseVote']) && $_POST['chooseVote'] != '') {
     $userVoteChoice = $_POST['chooseVote'];
     foreach ($hotels as $key => $hotel) {
