@@ -1,3 +1,69 @@
+<?php
+$hotels = [
+    [
+        'name' => 'Hotel Belvedere',
+        'description' => 'Hotel Belvedere Descrizione',
+        'parking' => true,
+        'vote' => 4,
+        'distance_to_center' => 10.4
+    ],
+    [
+        'name' => 'Hotel Futuro',
+        'description' => 'Hotel Futuro Descrizione',
+        'parking' => true,
+        'vote' => 2,
+        'distance_to_center' => 2
+    ],
+    [
+        'name' => 'Hotel Rivamare',
+        'description' => 'Hotel Rivamare Descrizione',
+        'parking' => false,
+        'vote' => 1,
+        'distance_to_center' => 1
+    ],
+    [
+        'name' => 'Hotel Bellavista',
+        'description' => 'Hotel Bellavista Descrizione',
+        'parking' => false,
+        'vote' => 5,
+        'distance_to_center' => 5.5
+    ],
+    [
+        'name' => 'Hotel Milano',
+        'description' => 'Hotel Milano Descrizione',
+        'parking' => true,
+        'vote' => 2,
+        'distance_to_center' => 50
+    ],
+];
+
+$userParkingChoice = $_POST['chooseParking'];
+$newHotels = [];
+// if (isset($userParkingChoice) && $userParkingChoice == 'Yes' && $userParkingChoice != '') {
+//     foreach ($hotels as $key => $hotel) {
+//         if ($hotel['parking'] == true) {
+//             array_push($newHotels, $hotel);
+//         }
+//     }
+//     $hotels = $newHotels;
+// }
+$userVoteChoice = $_POST['chooseVote'];
+if (isset($userVoteChoice) && $userVoteChoice != '') {
+    foreach ($hotels as $key => $hotel) {
+        if ($userVoteChoice == $hotel['vote']) {
+            array_push($newHotels, $hotel);
+        }
+    }
+    $hotels = $newHotels;
+}
+
+
+
+
+//Se esiste ed  è uguale a 1 { newArray, forEach oldArray push se parking = true} oldArray = newArray;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,72 +79,58 @@
 
 <body>
     <main>
-        <?php
-        $hotels = [
-            [
-                'name' => 'Hotel Belvedere',
-                'description' => 'Hotel Belvedere Descrizione',
-                'parking' => true,
-                'vote' => 4,
-                'distance_to_center' => 10.4
-            ],
-            [
-                'name' => 'Hotel Futuro',
-                'description' => 'Hotel Futuro Descrizione',
-                'parking' => true,
-                'vote' => 2,
-                'distance_to_center' => 2
-            ],
-            [
-                'name' => 'Hotel Rivamare',
-                'description' => 'Hotel Rivamare Descrizione',
-                'parking' => false,
-                'vote' => 1,
-                'distance_to_center' => 1
-            ],
-            [
-                'name' => 'Hotel Bellavista',
-                'description' => 'Hotel Bellavista Descrizione',
-                'parking' => false,
-                'vote' => 5,
-                'distance_to_center' => 5.5
-            ],
-            [
-                'name' => 'Hotel Milano',
-                'description' => 'Hotel Milano Descrizione',
-                'parking' => true,
-                'vote' => 2,
-                'distance_to_center' => 50
-            ],
-        ];
-        ?>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Parking</th>
-                    <th scope="col">Vote</th>
-                    <th scope="col">Distance to center</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($hotels as $key => $hotel) {
-                    echo "
-                    <tr>
-                    <td>{$hotel['name']}</td>
-                    <td>{$hotel['description']}</td>
-                    <td>{$hotel['parking']}</td>
-                    <td>{$hotel['vote']}</td>
-                    <td>{$hotel['distance_to_center']}</td>
-                    </tr>
-                    ";
-                }
-                ?>
-            </tbody>
-        </table>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <form action="./index.php" method="POST" class="w-25 my-5">
+                        <div class="mb-3 mt-5">
+                            <!-- <select class="form-select" name="chooseParking">
+                                <option selected>Search for hotels that have parking</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select> -->
+                            Do you need parking area?
+                            <input type="checkbox" name="chooseParking" value="Yes">
+                        </div>
+                        <div class="mb-3">
+                            <label for="hotelsVote" class="form-label">Choose hotel ranking</label>
+                            <input type="number" class="form-control" name="chooseVote" max="5">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Parking</th>
+                                <th scope="col">Vote</th>
+                                <th scope="col">Distance to center</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($hotels as $key => $hotel) {
+                                echo "
+                        <tr>
+                        <td>{$hotel['name']}</td>
+                        <td>{$hotel['description']}</td>
+                        <td>{$hotel['parking']}</td>
+                        <td>{$hotel['vote']}</td>
+                        <td>{$hotel['distance_to_center']}</td>
+                        </tr>
+                        ";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 
